@@ -44,7 +44,7 @@ public class CourseServiceImpl implements CourseService {
 		List<Course> collect = list.stream().filter(i->i.getId()!=id).collect(Collectors.toList());
 		if(collect.size()!=list.size()) {
 			list=collect;
-			return list.stream().filter(i->i.getId()==id).findFirst().get();
+			return list.stream().filter(i->i.getId()==id).findAny().get();
 		}
 		else {
 			return null;
@@ -55,6 +55,20 @@ public class CourseServiceImpl implements CourseService {
 	@Override
 	public Course updateCourse(Course course, int id) {
 		// TODO Auto-generated method stub
+		
+		Course course1 = list.stream().filter(i->i.getId()==id).findAny().orElse(null);
+		if(course1!=null) {
+			if(course.getTitle()!=null) {
+				course1.setTitle(course.getTitle());
+			}
+			if(course.getDescription()!=null) {
+				course1.setDescription(course.getDescription());
+			}
+			List<Course> list2 = list.stream().filter(i->i.getId()!=id).collect(Collectors.toList());
+		    list2.add(course1);
+		    list=list2;
+		    return course1;
+		}
 		return null;
 	}
 
