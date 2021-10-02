@@ -2,6 +2,7 @@ package com.springRest.springRest.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,25 @@ public class CourseServiceImpl implements CourseService {
 		// TODO Auto-generated method stub
 		list.add(course);
 		return course;
+	}
+
+	@Override
+	public Course deleteCourse(int id) {
+		List<Course> collect = list.stream().filter(i->i.getId()!=id).collect(Collectors.toList());
+		if(collect.size()!=list.size()) {
+			list=collect;
+			return list.stream().filter(i->i.getId()==id).findFirst().get();
+		}
+		else {
+			return null;
+		}
+		
+	}
+
+	@Override
+	public Course updateCourse(Course course, int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

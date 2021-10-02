@@ -3,9 +3,11 @@ package com.springRest.springRest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +44,16 @@ public class MyController {
 	@PostMapping("/course")
 	public Course addCourse(@RequestBody Course course) {
 		return courseService.addCourse(course);
+	}
+
+	@DeleteMapping("/course/{id}")
+	public Course deleteCourse(@PathVariable("id") int id) {
+		return courseService.deleteCourse(id);
+	}
+
+	@PutMapping("/course/{id}")
+	public Course updateCourse(@RequestBody Course course, @PathVariable("id") int id) {
+		return courseService.updateCourse(course, id);
 	}
 
 }
