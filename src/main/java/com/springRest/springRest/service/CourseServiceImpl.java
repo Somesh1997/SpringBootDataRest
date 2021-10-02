@@ -23,4 +23,19 @@ public class CourseServiceImpl implements CourseService {
 		return list;
 	}
 
+	public Course getCourseById(int id) {
+		// TODO Auto-generated method stub
+
+		Course course = list.stream().filter(i -> i.getId() == id).findAny().orElse(null);
+
+		return course;
+	}
+
+	@Override
+	public Course addCourse(Course course) {
+		// TODO Auto-generated method stub
+		list.add(course);
+		return course;
+	}
+
 }
